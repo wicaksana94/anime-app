@@ -1,0 +1,35 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+node_modules/
+
+# next.js build output
+.next/
+out/
+
+# production environment
+build/
+
+# development environment
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE (e.g. Visual Studio Code) configuration
+.idea/
+.vscode/
+
+# OS (e.g. macOS) temporary files
+.DS_Store
+
+# npm package manager
+npm-debug.log
+yarn-error.log
+
+# Optional: editor configuration
+*.swp
+*.swo
+
+# Optional: Jest coverage reports
+coverage/
