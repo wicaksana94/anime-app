@@ -1,24 +1,25 @@
 import React from 'react'
 import Link from 'next/link'
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import axios from 'axios'
+import { useAnime } from '../context/AnimeContext'
 import SearchBar from '../components/SearchBar'
 import styles from '../styles/Header.module.css'
 
 const Header = () => {
-  const [search, setSearch] = useState('')
-  const [animes, setAnimes] = useState([])
-  const [searchTerm, setSearchTerm] = useState('')
-  const [currentPage, setCurrentPage] = useState(1)
-  const [totalPages, setTotalPages] = useState(1)
-  const [loading, setLoading] = useState(true)
-
-  const handleSearchChange = (e) => {
-    setSearch(e.target.value)
-  }
+  const {
+    setAnimes,
+    searchTerm,
+    setSearchTerm,
+    currentPage,
+    setCurrentPage,
+    setTotalPages,
+    setLoading,
+  } = useAnime()
 
   const fetchAnimes = async (page = 1, query = '') => {
     try {
+      setLoading(true)
       const response = await axios.get(`https://api.jikan.moe/v4/anime`, {
         params: {
           q: query,
@@ -45,8 +46,6 @@ const Header = () => {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault()
-    // Handle search logic here
-    console.log('Search query:', search)
   }
 
   const handleSearch = async (term) => {
@@ -65,28 +64,12 @@ const Header = () => {
           <li className={styles.header__navItem}>
             <Link href="/">Home</Link>
           </li>
-          <li className={styles.header__navItem}>
-            <Link href="/about">About</Link>
-          </li>
-          <li className={styles.header__navItem}>
-            <Link href="/contact">Contact</Link>
-          </li>
         </ul>
         <form
           className={styles.header__searchForm}
           onSubmit={handleSearchSubmit}
         >
-          {/* <input
-            type="text"
-            value={search}
-            onChange={handleSearchChange}
-            placeholder="Search..."
-            className={styles.header__searchInput}
-          /> */}
           <SearchBar onSearch={handleSearch} />
-          <button type="submit" className={styles.header__searchButton}>
-            Search
-          </button>
         </form>
       </nav>
     </header>

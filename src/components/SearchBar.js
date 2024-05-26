@@ -11,7 +11,7 @@ const SearchBar = ({ onSearch }) => {
   return (
     <input
       type="text"
-      placeholder="Search for an anime..."
+      placeholder="Search for an anime and press enter."
       onKeyDown={handleSearch}
       className={styles.searchBar}
     />

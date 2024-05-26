@@ -29,6 +29,7 @@
 
 .header__searchForm {
   display: flex;
+  min-width: 300px;
 }
 
 .header__searchInput {
