@@ -2,10 +2,14 @@ import React from 'react'
 import Layout from '../components/Layout'
 import '../styles/globals.css'
 import { AnimeProvider } from '../context/AnimeContext'
+import Head from 'next/head'
 
-function MyApp({ Component, pageProps }) {
+function AnimeApp({ Component, pageProps }) {
   return (
     <AnimeProvider>
+      <Head>
+        <title>Anime App</title>
+      </Head>
       <Layout>
         <Component {...pageProps} />
       </Layout>
@@ -13,4 +17,4 @@ function MyApp({ Component, pageProps }) {
   )
 }
 
-export default MyApp
+export default AnimeApp

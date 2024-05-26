@@ -1,16 +1,31 @@
-# Explanation
+# Anime App - Details View and Interaction
 
-## Design Decisions
+## Introduction
 
-1. **Component-based Architecture**: Components are reusable and modular, which makes the code easier to maintain and scale.
-2. **CSS Modules with BEM**: Using CSS modules ensures that styles are scoped locally, avoiding conflicts. BEM naming convention makes the CSS more readable and maintainable.
-3. **Pagination**: Implemented client-side pagination to improve the user experience by not loading all anime at once.
-4. **Search Functionality**: Allows users to easily find anime by their title.
-5. **Server-side Rendering**: For the anime detail page to ensure SEO and better performance.
+The Anime Details view provides users with comprehensive information about a specific anime, enhancing the user experience by offering detailed insights into the selected anime.
 
-## Optional Enhancements
+## View Creation
 
-1. **Caching**: To reduce API calls and improve performance.
-2. **Offline Capability**: Using service workers to make the app usable offline.
-3. **Responsive Design**: Ensuring the app works well on all devices.
-4. **Containerization**: Dockerizing the app for easier deployment.
+### Purpose
+
+The purpose of creating the Anime Details view is to fulfill the following objectives:
+
+1. Provide Detailed Information
+2. Enhance User Experience
+3. Support Exploration
+
+### Components
+
+1. **Anime Header**: Displays the anime's title and a large image representing the anime.
+2. **Anime Information**: Provides essential details about the anime.
+3. **Producers and Genres**: Lists the producers and genres associated with the anime.
+
+## Optional Features
+
+1. **Conditional Rendering**: Implemented to handle cases where data might be missing or unavailable.
+2. **Null/Undefined Checking**: Incorporated to prevent potential errors, such as accessing undefined properties.
+3. **Dynamic Loading**: Employed to display a loading indicator while fetching anime details asynchronously.
+
+## Conclusion
+
+The Anime Details view serves as a crucial component of our application, offering users comprehensive insights into their favorite anime titles.

@@ -11,8 +11,10 @@ const AnimeDetails = () => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    if (id) {
-      const fetchAnimeDetails = async () => {
+    let isMounted = true
+
+    const fetchAnimeDetails = async () => {
+      if (isMounted) {
         try {
           const response = await axios.get(
             `https://api.jikan.moe/v4/anime/${id}`
@@ -24,8 +26,14 @@ const AnimeDetails = () => {
           setLoading(false)
         }
       }
+    }
 
+    if (id) {
       fetchAnimeDetails()
+    }
+
+    return () => {
+      isMounted = false
     }
   }, [id])
 
@@ -40,11 +48,13 @@ const AnimeDetails = () => {
   return (
     <div className={styles['anime-details']}>
       <div className={styles['anime-details__header']}>
-        <img
-          className={styles['anime-details__image']}
-          src={anime.images.jpg.large_image_url}
-          alt={anime.title}
-        />
+        {anime.images.jpg && (
+          <img
+            className={styles['anime-details__image']}
+            src={anime.images.jpg.large_image_url}
+            alt={anime.title}
+          />
+        )}
         <div className={styles['anime-details__info']}>
           <h1 className={styles['anime-details__title']}>{anime.title}</h1>
           <p className={styles['anime-details__synopsis']}>{anime.synopsis}</p>
