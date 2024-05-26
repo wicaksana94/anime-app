@@ -30,11 +30,7 @@
 .anime-details__synopsis {
   font-size: 1em;
   color: #666;
-  height: 60px; /* Set a fixed height */
-  overflow: hidden; /* Hide the overflowing content */
-  text-overflow: ellipsis; /* Display ellipsis */
   display: -webkit-box;
-  -webkit-line-clamp: 3; /* Number of lines to show */
   -webkit-box-orient: vertical;
 }
 
@@ -54,6 +50,8 @@
 .anime-details__content ul {
   list-style-type: none;
   padding: 0;
+  display: flex;
+  gap: 10px;
 }
 
 .anime-details__content li {
