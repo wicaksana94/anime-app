@@ -8,88 +8,8 @@ import styles from '../styles/Home.module.css'
 import { useAnime } from '../context/AnimeContext'
 
 const Home = () => {
-  const {
-    animes,
-    setAnimes,
-    searchTerm,
-    setSearchTerm,
-    currentPage,
-    setCurrentPage,
-    totalPages,
-    setTotalPages,
-    loading,
-    setLoading,
-  } = useAnime()
-
-  useEffect(async () => {
-    // Fetch initial data or perform other side effects here
-    setLoading(true)
-    // Example fetch (replace with actual fetch logic)
-    // fetch('/api/animes')
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     setAnimes(data.animes)
-    //     setTotalPages(data.totalPages)
-    //     setLoading(false)
-    //   })
-    try {
-      const response = await axios.get(`https://api.jikan.moe/v4/anime`, {
-        params: {
-          q: query,
-          page: page,
-        },
-      })
-      setAnimes(response.data.data)
-      setTotalPages(
-        Math.ceil(
-          response.data.pagination.items.total /
-            response.data.pagination.items.per_page
-        )
-      )
-      setLoading(false)
-    } catch (error) {
-      console.error('Error fetching anime:', error)
-      setLoading(false)
-    }
-  }, [setAnimes, setTotalPages, setLoading])
-
-  const fetchAnimes = async (page = 1, query = '') => {
-    try {
-      const response = await axios.get(`https://api.jikan.moe/v4/anime`, {
-        params: {
-          q: query,
-          page: page,
-        },
-      })
-      setAnimes(response.data.data)
-      setTotalPages(
-        Math.ceil(
-          response.data.pagination.items.total /
-            response.data.pagination.items.per_page
-        )
-      )
-      setLoading(false)
-    } catch (error) {
-      console.error('Error fetching anime:', error)
-      setLoading(false)
-    }
-  }
-
-  useEffect(() => {
-    fetchAnimes(currentPage, searchTerm)
-  }, [currentPage, searchTerm])
-
-  const handleSearch = async (term) => {
-    setLoading(true)
-    try {
-      setSearchTerm(term)
-      setCurrentPage(1) // Reset page to 1 when performing a new search
-      setLoading(false)
-    } catch (error) {
-      console.error('Error fetching anime:', error)
-      setLoading(false)
-    }
-  }
+  const { animes, currentPage, setCurrentPage, totalPages, loading } =
+    useAnime()
 
   const handlePageChange = (page) => {
     setCurrentPage(page)
@@ -105,13 +25,16 @@ const Home = () => {
 
   return (
     <div className={styles.container}>
-      <SearchBar onSearch={handleSearch} />
       <AnimeList animes={animes} />
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={handlePageChange}
-      />
+      {!animes || animes.length === 0 ? (
+        <Loading />
+      ) : (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
+      )}
     </div>
   )
 }
