@@ -1,0 +1,11 @@
+/* components/Layout.module.css */
+.layout {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 100vh;
+}
+
+.layout__main {
+  flex: 1;
+}
